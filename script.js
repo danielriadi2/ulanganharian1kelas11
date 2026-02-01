@@ -1,419 +1,68 @@
 // ============================================
-// SCRIPT UTAMA - DETEKSI KECURANGAN OTOMATIS
+// SCRIPT UTAMA - ULANGAN HARIAN SMA NEGERI 5 TANAH PUTIH
 // ============================================
 
-// Konfigurasi
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw3Un2_r8D_81K699B6mjcCd-SRcnxFOyanWVGVZipm5W_XsSE9ad4rJeE19V__Ffyvmw/exec'; // Ganti dengan URL Google Apps Script
-const EXAM_DURATION = 13 * 60 + 45; // 13 menit 45 detik
-const MAX_TAB_CHANGES = 0; // Maksimal 0 kali ganti tab
-const MAX_WARNINGS = 1; // Maksimal 1 peringatan
-
-// Data Soal (15 soal)
+// Data Soal
 const soalData = [
-    // Soal 1
-    {
-        id: 1,
-        soal: "Saat pertama kali datang, Jepang menyebut dirinya sebagai...",
-        pilihan: ["Saudara Muda Asia", "Saudara Tua Asia", "Penjajah Baru Asia", "Sekutu Asia", "Tamu Asia"],
-        jawaban: 1 // index 1 = "Saudara Tua Asia"
-    },
-    // Soal 2
-    {
-        id: 2,
-        soal: "Tujuan utama Jepang menjajah Indonesia adalah untuk mengambil...",
-        pilihan: ["Rempah-rempah", "Bahan baku industri dan perang seperti minyak", "Karya seni dan budaya", "Tenaga ahli Indonesia", "Ilmu pengetahuan dari Belanda"],
-        jawaban: 1
-    },
-    // Soal 3
-    {
-        id: 3,
-        soal: "Apa yang terjadi dengan bendera Merah Putih pada awal masa Jepang?",
-        pilihan: ["Dilarang dikibarkan", "Dijadikan bendera resmi", "Diizinkan dikibarkan setiap hari", "Warnanya diubah", "Dikibarkan bersama bendera Belanda"],
-        jawaban: 0
-    },
-    // Soal 4
-    {
-        id: 4,
-        soal: "Kerja paksa tanpa bayaran pada masa Jepang disebut...",
-        pilihan: ["Rodi", "Romusha", "Heiho", "Wajib kerja", "Tanam paksa"],
-        jawaban: 1
-    },
-    // Soal 5
-    {
-        id: 5,
-        soal: "Bahasa resmi yang diwajibkan Jepang di sekolah dan kantor adalah...",
-        pilihan: ["Belanda dan Inggris", "Jepang dan Indonesia", "Jawa dan Melayu", "Daerah masing-masing", "Belanda dan Jepang"],
-        jawaban: 1
-    },
-    // Soal 6
-    {
-        id: 6,
-        soal: "Organisasi yang dibentuk Jepang dan dipimpin Soekarno-Hatta untuk mengerahkan tenaga rakyat membantu Jepang adalah...",
-        pilihan: ["BPUPKI", "Putera", "Gerakan 3A", "PETA", "Seinendan"],
-        jawaban: 1
-    },
-    // Soal 7
-    {
-        id: 7,
-        soal: "Barisan pembantu polisi yang anggotanya para pemuda lokal disebut...",
-        pilihan: ["Seinendan", "Keibodan", "Heiho", "Romusha", "Kempetai"],
-        jawaban: 1
-    },
-    // Soal 8
-    {
-        id: 8,
-        soal: "Kebijakan Jepang yang memaksa petani menyerahkan hasil padinya disebut sistem...",
-        pilihan: ["Sewa tanah", "Wajib serah (setoran)", "Ekspor bebas", "Tanam paksa", "Iuran wajib"],
-        jawaban: 1
-    },
-    // Soal 9
-    {
-        id: 9,
-        soal: "Mengapa Jepang melarang penggunaan bahasa Belanda dan mewajibkan bahasa Jepang serta Indonesia?",
-        pilihan: ["Karena bahasa Belanda sulit dipelajari.", "Untuk menghapus pengaruh Barat dan mengontrol pikiran rakyat.", "Karena tidak ada guru bahasa Belanda.", "Agar rakyat bisa bekerja di perusahaan Jepang.", "Untuk mempersatukan semua suku di Indonesia."],
-        jawaban: 1
-    },
-    // Soal 10
-    {
-        id: 10,
-        soal: "Upacara menyembah Kaisar Jepang dengan membungkuk ke arah Tokyo disebut...",
-        pilihan: ["Harakiri", "Seikerei", "Sumpah Pemuda", "Meditasi", "Bakti sosial"],
-        jawaban: 1
-    },
-    // Soal 11
-    {
-        id: 11,
-        soal: "Pulau Jawa pada masa Jepang diperintah oleh tentara...",
-        pilihan: ["Darat (Rikugun)", "Laut (Kaigun)", "Udara", "Gabungan", "Sekutu"],
-        jawaban: 0
-    },
-    // Soal 12
-    {
-        id: 12,
-        soal: "Polisi militer rahasia Jepang yang terkenal kejam adalah...",
-        pilihan: ["Heiho", "Kempetai", "Seinendan", "Keibodan", "Tokkeitai"],
-        jawaban: 1
-    },
-    // Soal 13
-    {
-        id: 13,
-        soal: "Tanaman yang wajib ditanam rakyat untuk bahan pelumas mesin perang adalah...",
-        pilihan: ["Teh", "Kopi", "Jarak", "Padi", "Karet"],
-        jawaban: 2
-    },
-    // Soal 14
-    {
-        id: 14,
-        soal: "Partai-partai politik zaman Belanda saat Jepang datang...",
-        pilihan: ["Diberi kebebasan", "Dibubarkan", "Dijadikan satu partai", "Diizinkan berprotes", "Dibiarkan saja"],
-        jawaban: 1
-    },
-    // Soal 15
-    {
-        id: 15,
-        soal: "Janji Jepang yang paling menarik bagi rakyat Indonesia adalah...",
-        pilihan: ["Gaji yang besar", "Indonesia akan dimerdekakan", "Banyak lowongan kerja", "Pendidikan gratis", "Tanah untuk petani"],
-        jawaban: 1
-    }
+    { id: 1, soal: "Saat pertama kali datang, Jepang menyebut dirinya sebagai...", pilihan: ["Saudara Muda Asia", "Saudara Tua Asia", "Penjajah Baru Asia", "Sekutu Asia", "Tamu Asia"], jawaban: 1 },
+    { id: 2, soal: "Tujuan utama Jepang menjajah Indonesia adalah untuk mengambil...", pilihan: ["Rempah-rempah", "Bahan baku industri dan perang seperti minyak", "Karya seni dan budaya", "Tenaga ahli Indonesia", "Ilmu pengetahuan dari Belanda"], jawaban: 1 },
+    { id: 3, soal: "Apa yang terjadi dengan bendera Merah Putih pada awal masa Jepang?", pilihan: ["Dilarang dikibarkan", "Dijadikan bendera resmi", "Diizinkan dikibarkan setiap hari", "Warnanya diubah", "Dikibarkan bersama bendera Belanda"], jawaban: 0 },
+    { id: 4, soal: "Kerja paksa tanpa bayaran pada masa Jepang disebut...", pilihan: ["Rodi", "Romusha", "Heiho", "Wajib kerja", "Tanam paksa"], jawaban: 1 },
+    { id: 5, soal: "Bahasa resmi yang diwajibkan Jepang di sekolah dan kantor adalah...", pilihan: ["Belanda dan Inggris", "Jepang dan Indonesia", "Jawa dan Melayu", "Daerah masing-masing", "Belanda dan Jepang"], jawaban: 1 },
+    { id: 6, soal: "Organisasi yang dibentuk Jepang dan dipimpin Soekarno-Hatta untuk mengerahkan tenaga rakyat membantu Jepang adalah...", pilihan: ["BPUPKI", "Putera", "Gerakan 3A", "PETA", "Seinendan"], jawaban: 1 },
+    { id: 7, soal: "Barisan pembantu polisi yang anggotanya para pemuda lokal disebut...", pilihan: ["Seinendan", "Keibodan", "Heiho", "Romusha", "Kempetai"], jawaban: 1 },
+    { id: 8, soal: "Kebijakan Jepang yang memaksa petani menyerahkan hasil padinya disebut sistem...", pilihan: ["Sewa tanah", "Wajib serah (setoran)", "Ekspor bebas", "Tanam paksa", "Iuran wajib"], jawaban: 1 },
+    { id: 9, soal: "Mengapa Jepang melarang penggunaan bahasa Belanda dan mewajibkan bahasa Jepang serta Indonesia?", pilihan: ["Karena bahasa Belanda sulit dipelajari.", "Untuk menghapus pengaruh Barat dan mengontrol pikiran rakyat.", "Karena tidak ada guru bahasa Belanda.", "Agar rakyat bisa bekerja di perusahaan Jepang.", "Untuk mempersatukan semua suku di Indonesia."], jawaban: 1 },
+    { id: 10, soal: "Upacara menyembah Kaisar Jepang dengan membungkuk ke arah Tokyo disebut...", pilihan: ["Harakiri", "Seikerei", "Sumpah Pemuda", "Meditasi", "Bakti sosial"], jawaban: 1 },
+    { id: 11, soal: "Pulau Jawa pada masa Jepang diperintah oleh tentara...", pilihan: ["Darat (Rikugun)", "Laut (Kaigun)", "Udara", "Gabungan", "Sekutu"], jawaban: 0 },
+    { id: 12, soal: "Polisi militer rahasia Jepang yang terkenal kejam adalah...", pilihan: ["Heiho", "Kempetai", "Seinendan", "Keibodan", "Tokkeitai"], jawaban: 1 },
+    { id: 13, soal: "Tanaman yang wajib ditanam rakyat untuk bahan pelumas mesin perang adalah...", pilihan: ["Teh", "Kopi", "Jarak", "Padi", "Karet"], jawaban: 2 },
+    { id: 14, soal: "Partai-partai politik zaman Belanda saat Jepang datang...", pilihan: ["Diberi kebebasan", "Dibubarkan", "Dijadikan satu partai", "Diizinkan berprotes", "Dibiarkan saja"], jawaban: 1 },
+    { id: 15, soal: "Janji Jepang yang paling menarik bagi rakyat Indonesia adalah...", pilihan: ["Gaji yang besar", "Indonesia akan dimerdekakan", "Banyak lowongan kerja", "Pendidikan gratis", "Tanah untuk petani"], jawaban: 1 }
 ];
 
+// Konfigurasi
+const CONFIG = {
+    WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbxUWW-7kZ8N5tX8cWQ7qHtqH/exec', // GANTI DENGAN URL ANDA
+    EXAM_DURATION: 13 * 60 + 45,
+    DEBUG: true
+};
+
 // Variabel Global
-let jawabanUser = Array(soalData.length).fill(null);
+let jawabanUser = Array(15).fill(null);
 let currentQuestion = 0;
-let timeLeft = EXAM_DURATION;
+let timeLeft = CONFIG.EXAM_DURATION;
 let timerInterval;
 let examStarted = false;
-let startTime;
-let endTime;
-
-// Variabel Deteksi Kecurangan
-let tabChangeCount = 0;
-let rightClickCount = 0;
-let copyAttemptCount = 0;
-let f12Pressed = false;
-let fullscreenExitCount = 0;
-let warningCount = 0;
-let isCheatingDetected = false;
-let cheatingReason = "";
-
-// DOM Elements
-const dataSection = document.getElementById('dataSection');
-const examSection = document.getElementById('examSection');
-const resultSection = document.getElementById('resultSection');
-const cheatingSection = document.getElementById('cheatingSection');
-
-const btnStart = document.getElementById('btnStart');
-const btnPrev = document.getElementById('btnPrev');
-const btnNext = document.getElementById('btnNext');
-const btnSubmit = document.getElementById('btnSubmit');
-const btnReturnHome = document.getElementById('btnReturnHome');
-
-const timerElement = document.getElementById('timer');
-const tabCountElement = document.getElementById('tabCount');
-const rightClickCountElement = document.getElementById('rightClickCount');
-const warningCountElement = document.getElementById('warningCount');
-const questionsContainer = document.getElementById('questionsContainer');
-const currentQuestionElement = document.getElementById('currentQuestion');
+let startTime, endTime;
+let tabChangeCount = 0, rightClickCount = 0, cheatingDetected = false;
 
 // ===============================
-// FUNGSI DETEKSI KECURANGAN
+// INISIALISASI
 // ===============================
-
-function initCheatingDetection() {
-    console.log("🛡️ Sistem deteksi kecurangan diaktifkan...");
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Sistem Ulangan Harian dimuat');
     
-    // 1. Deteksi Pergantian Tab/Window
-    document.addEventListener('visibilitychange', () => {
-        if (examStarted && !isCheatingDetected) {
-            if (document.hidden) {
-                tabChangeCount++;
-                tabCountElement.textContent = tabChangeCount;
-                
-                if (tabChangeCount >= MAX_TAB_CHANGES) {
-                    cheatingReason = `Terlalu sering berganti tab (${tabChangeCount}x)`;
-                    stopExamForCheating();
-                } else {
-                    showWarning(`PERINGATAN ${tabChangeCount}: Jangan keluar dari halaman ujian!`);
-                }
-            }
-        }
-    });
+    // Event Listeners
+    document.getElementById('btnStart').addEventListener('click', startExam);
+    document.getElementById('btnPrev').addEventListener('click', () => navigate(-1));
+    document.getElementById('btnNext').addEventListener('click', () => navigate(1));
+    document.getElementById('btnSubmit').addEventListener('click', confirmSubmit);
+    document.getElementById('btnReturnHome').addEventListener('click', () => location.reload());
     
-    // 2. Deteksi Klik Kanan (Copy/Paste)
-    document.addEventListener('contextmenu', (e) => {
-        if (examStarted && !isCheatingDetected) {
-            e.preventDefault();
-            rightClickCount++;
-            rightClickCountElement.textContent = rightClickCount;
-            
-            if (rightClickCount >= 2) {
-                cheatingReason = `Melakukan klik kanan berulang (${rightClickCount}x)`;
-                stopExamForCheating();
-            } else {
-                showWarning("DILARANG menggunakan klik kanan!");
-            }
-        }
-    });
-    
-    // 3. Deteksi Copy (Ctrl+C)
-    document.addEventListener('copy', (e) => {
-        if (examStarted && !isCheatingDetected) {
-            e.preventDefault();
-            copyAttemptCount++;
-            cheatingReason = `Mencoba menyalin teks (copy)`;
-            stopExamForCheating();
-        }
-    });
-    
-    // 4. Deteksi Developer Tools (F12, Ctrl+Shift+I, dll)
-    document.addEventListener('keydown', (e) => {
-        if (!examStarted || isCheatingDetected) return;
-        
-        // F12
-        if (e.key === 'F12') {
-            e.preventDefault();
-            f12Pressed = true;
-            cheatingReason = "Menekan F12 (Developer Tools)";
-            stopExamForCheating();
-        }
-        
-        // Ctrl+Shift+I
-        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-            e.preventDefault();
-            cheatingReason = "Membuka Developer Tools (Ctrl+Shift+I)";
-            stopExamForCheating();
-        }
-        
-        // Ctrl+Shift+J
-        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-            e.preventDefault();
-            cheatingReason = "Membuka Console (Ctrl+Shift+J)";
-            stopExamForCheating();
-        }
-        
-        // Ctrl+Shift+C
-        if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-            e.preventDefault();
-            cheatingReason = "Mencoba inspect element (Ctrl+Shift+C)";
-            stopExamForCheating();
-        }
-        
-        // Print Screen
-        if (e.key === 'PrintScreen') {
-            e.preventDefault();
-            cheatingReason = "Mencoba screenshot (Print Screen)";
-            stopExamForCheating();
-        }
-    });
-    
-    // 5. Deteksi Keluar Fullscreen
-    document.addEventListener('fullscreenchange', () => {
-        if (examStarted && !isCheatingDetected && !document.fullscreenElement) {
-            fullscreenExitCount++;
-            if (fullscreenExitCount >= 2) {
-                cheatingReason = "Keluar dari mode fullscreen berulang kali";
-                stopExamForCheating();
-            }
-        }
-    });
-    
-    // 6. Deteksi Resize Window (Dev Tools biasanya merubah ukuran)
-    let windowWidth = window.innerWidth;
-    let windowHeight = window.innerHeight;
-    window.addEventListener('resize', () => {
-        if (!examStarted || isCheatingDetected) return;
-        
-        // Jika perubahan ukuran signifikan (>300px), curiga dev tools
-        if (Math.abs(window.innerWidth - windowWidth) > 300 || 
-            Math.abs(window.innerHeight - windowHeight) > 300) {
-            cheatingReason = "Perubahan ukuran window yang tidak wajar (diduga membuka Dev Tools)";
-            stopExamForCheating();
-        }
-        
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight;
-    });
-    
-    // 7. Deteksi Attempt to Switch App (Alt+Tab, Windows Key, etc)
-    document.addEventListener('keydown', (e) => {
-        if (!examStarted || isCheatingDetected) return;
-        
-        // Alt+Tab
-        if (e.altKey && e.key === 'Tab') {
-            e.preventDefault();
-            warningCount++;
-            warningCountElement.textContent = warningCount;
-            
-            if (warningCount >= MAX_WARNINGS) {
-                cheatingReason = "Terlalu banyak peringatan keyboard shortcut";
-                stopExamForCheating();
-            }
-        }
-        
-        // Windows Key / Command Key
-        if (e.key === 'Meta' || e.key === 'OS') {
-            warningCount++;
-            warningCountElement.textContent = warningCount;
-            
-            if (warningCount >= MAX_WARNINGS) {
-                cheatingReason = "Menggunakan Windows/Command Key berulang";
-                stopExamForCheating();
-            }
-        }
-    });
-    
-    // 8. Deteksi Tab Baru (Ctrl+T, Ctrl+N)
-    document.addEventListener('keydown', (e) => {
-        if (!examStarted || isCheatingDetected) return;
-        
-        if ((e.ctrlKey && e.key === 't') || (e.ctrlKey && e.key === 'n')) {
-            e.preventDefault();
-            cheatingReason = "Mencoba membuka tab/window baru";
-            stopExamForCheating();
-        }
-    });
-}
-
-// Fungsi untuk menghentikan ujian karena kecurangan
-async function stopExamForCheating() {
-    if (isCheatingDetected) return;
-    
-    isCheatingDetected = true;
-    clearInterval(timerInterval);
-    
-    // Tampilkan pesan kecurangan
-    showCheatingScreen();
-    
-    // Hitung skor sejauh ini
-    const score = calculateScore();
-    const percentage = Math.round((score / soalData.length) * 100);
-    const timeUsed = Math.floor((new Date() - startTime) / 1000);
-    
-    // Kirim data ke Google Sheets
-    await sendToGoogleSheets({
-        nama: document.getElementById('nama').value,
-        kelas: document.getElementById('kelas').value,
-        skor: score,
-        jawabanBenar: score,
-        totalSoal: soalData.length,
-        persentase: percentage + "%",
-        waktuDigunakan: formatTime(timeUsed),
-        statusUjian: "DIHENTIKAN",
-        alasanHenti: cheatingReason,
-        tabChanges: tabChangeCount,
-        copyAttempts: copyAttemptCount,
-        rightClicks: rightClickCount,
-        f12Pressed: f12Pressed ? 1 : 0,
-        fullscreenExit: fullscreenExitCount,
-        startTime: startTime.toISOString(),
-        endTime: new Date().toISOString(),
-        ...getDeviceInfo()
-    });
-}
-
-// Tampilkan layar kecurangan
-function showCheatingScreen() {
-    examSection.style.display = 'none';
-    cheatingSection.style.display = 'block';
-    
-    document.getElementById('cheatingName').textContent = document.getElementById('nama').value;
-    document.getElementById('cheatingClass').textContent = document.getElementById('kelas').value;
-    document.getElementById('cheatingTime').textContent = new Date().toLocaleString('id-ID');
-    document.getElementById('cheatingReason').textContent = cheatingReason;
-    document.getElementById('cheatingViolation').textContent = getViolationSummary();
-}
-
-function getViolationSummary() {
-    const violations = [];
-    if (tabChangeCount > 0) violations.push(`Ganti tab: ${tabChangeCount}x`);
-    if (rightClickCount > 0) violations.push(`Klik kanan: ${rightClickCount}x`);
-    if (copyAttemptCount > 0) violations.push(`Copy: ${copyAttemptCount}x`);
-    if (f12Pressed) violations.push(`F12: Ya`);
-    if (fullscreenExitCount > 0) violations.push(`Keluar fullscreen: ${fullscreenExitCount}x`);
-    
-    return violations.join(', ') || "Tidak ada data";
-}
-
-// Tampilkan peringatan
-function showWarning(message) {
-    const warning = document.createElement('div');
-    warning.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #FF9800;
-        color: white;
-        padding: 15px 25px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(255,152,0,0.3);
-        z-index: 9999;
-        font-weight: bold;
-        animation: slideIn 0.5s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    `;
-    
-    warning.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-    document.body.appendChild(warning);
-    
-    setTimeout(() => {
-        warning.style.animation = 'slideOut 0.5s ease';
-        setTimeout(() => warning.remove(), 500);
-    }, 3000);
-}
+    // Test koneksi
+    testConnection();
+});
 
 // ===============================
-// FUNGSI UTAMA UJIAN
+// FUNGSI UJIAN
 // ===============================
-
-// Mulai ujian
-btnStart.addEventListener('click', () => {
+function startExam() {
     const nama = document.getElementById('nama').value.trim();
     const kelas = document.getElementById('kelas').value;
     
     if (!nama || !kelas) {
-        alert("Harap isi nama lengkap dan pilih kelas!");
+        alert('Harap isi nama lengkap dan pilih kelas!');
         return;
     }
     
@@ -421,139 +70,156 @@ btnStart.addEventListener('click', () => {
     document.getElementById('studentName').textContent = nama;
     document.getElementById('studentClass').textContent = kelas;
     
-    // Tampilkan section ujian
-    dataSection.style.display = 'none';
-    examSection.style.display = 'block';
+    // Tampilkan ujian
+    document.getElementById('dataSection').style.display = 'none';
+    document.getElementById('examSection').style.display = 'block';
     
     // Mulai timer
     startTime = new Date();
     startTimer();
+    examStarted = true;
     
     // Aktifkan deteksi kecurangan
-    examStarted = true;
     initCheatingDetection();
     
-    // Request fullscreen
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(() => {
-            showWarning("Mode fullscreen tidak aktif. Tetap jujur!");
-        });
-    }
-    
     // Load soal pertama
-    loadQuestion(currentQuestion);
-});
+    loadQuestion(0);
+}
 
-// Timer
 function startTimer() {
-    updateTimerDisplay();
-    
+    updateTimer();
     timerInterval = setInterval(() => {
         timeLeft--;
-        updateTimerDisplay();
-        
+        updateTimer();
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            if (!isCheatingDetected) {
-                submitExam();
-            }
+            submitExam();
         }
     }, 1000);
 }
 
-function updateTimerDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+function updateTimer() {
+    const min = Math.floor(timeLeft / 60);
+    const sec = timeLeft % 60;
+    document.getElementById('timer').textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     
-    // Warna peringatan
     if (timeLeft <= 60) {
-        timerElement.style.color = '#f44336';
-        timerElement.style.animation = 'pulse 1s infinite';
+        document.getElementById('timer').style.color = '#f44336';
     }
 }
 
-// Load soal
 function loadQuestion(index) {
-    questionsContainer.innerHTML = '';
-    currentQuestionElement.textContent = index + 1;
-    
     const question = soalData[index];
-    
-    const questionHTML = `
+    document.getElementById('questionsContainer').innerHTML = `
         <div class="question-card">
             <div class="question-number">${question.id}</div>
             <div class="question-text">${question.soal}</div>
             <div class="options-container">
-                ${question.pilihan.map((option, i) => `
-                    <div class="option ${jawabanUser[index] === i ? 'selected' : ''}" 
-                         data-index="${i}" 
-                         onclick="selectAnswer(${index}, ${i})">
+                ${question.pilihan.map((opt, i) => `
+                    <div class="option ${jawabanUser[index] === i ? 'selected' : ''}" onclick="selectAnswer(${index}, ${i})">
                         <div class="option-letter">${String.fromCharCode(65 + i)}</div>
-                        <div class="option-text">${option}</div>
+                        <div class="option-text">${opt}</div>
                     </div>
                 `).join('')}
             </div>
         </div>
     `;
     
-    questionsContainer.innerHTML = questionHTML;
-    
-    // Update tombol navigasi
-    btnPrev.disabled = index === 0;
-    btnNext.disabled = index === soalData.length - 1;
-    btnNext.innerHTML = index === soalData.length - 1 ? 
-        'REVIEW SOAL <i class="fas fa-check-circle"></i>' : 
-        'SELANJUTNYA <i class="fas fa-arrow-right"></i>';
+    document.getElementById('currentQuestion').textContent = index + 1;
+    document.getElementById('btnPrev').disabled = index === 0;
+    document.getElementById('btnNext').disabled = index === 14;
 }
 
-// Pilih jawaban
-window.selectAnswer = (questionIndex, answerIndex) => {
-    if (isCheatingDetected) return;
-    
-    jawabanUser[questionIndex] = answerIndex;
-    
-    // Update tampilan
-    const options = document.querySelectorAll('.option');
-    options.forEach((option, i) => {
-        const idx = parseInt(option.dataset.index);
-        option.classList.toggle('selected', idx === answerIndex);
-    });
+window.selectAnswer = function(qIndex, aIndex) {
+    jawabanUser[qIndex] = aIndex;
+    loadQuestion(qIndex);
 };
 
-// Navigasi soal
-btnPrev.addEventListener('click', () => {
-    if (currentQuestion > 0) {
-        currentQuestion--;
-        loadQuestion(currentQuestion);
+function navigate(direction) {
+    const newIndex = currentQuestion + direction;
+    if (newIndex >= 0 && newIndex < 15) {
+        currentQuestion = newIndex;
+        loadQuestion(newIndex);
     }
-});
+}
 
-btnNext.addEventListener('click', () => {
-    if (currentQuestion < soalData.length - 1) {
-        currentQuestion++;
-        loadQuestion(currentQuestion);
-    } else if (currentQuestion === soalData.length - 1) {
-        // Jika di soal terakhir, tampilkan konfirmasi submit
-        if (confirm("Apakah Anda yakin ingin mengumpulkan jawaban? Pastikan semua soal sudah terjawab.")) {
-            submitExam();
+// ===============================
+// DETEKSI KECURANGAN
+// ===============================
+function initCheatingDetection() {
+    // Deteksi ganti tab
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && examStarted && !cheatingDetected) {
+            tabChangeCount++;
+            document.getElementById('tabCount').textContent = tabChangeCount;
+            
+            if (tabChangeCount >= 3) {
+                cheatingDetected = true;
+                stopExam('Terlalu sering ganti tab');
+            }
         }
-    }
-});
-
-// Submit ujian
-btnSubmit.addEventListener('click', () => {
-    if (isCheatingDetected) return;
+    });
     
+    // Deteksi klik kanan
+    document.addEventListener('contextmenu', (e) => {
+        if (examStarted && !cheatingDetected) {
+            e.preventDefault();
+            rightClickCount++;
+            document.getElementById('rightClickCount').textContent = rightClickCount;
+            
+            if (rightClickCount >= 2) {
+                cheatingDetected = true;
+                stopExam('Klik kanan berulang');
+            }
+        }
+    });
+    
+    // Deteksi F12
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'F12' && examStarted && !cheatingDetected) {
+            e.preventDefault();
+            cheatingDetected = true;
+            stopExam('Menekan F12 (Developer Tools)');
+        }
+    });
+}
+
+function stopExam(reason) {
+    clearInterval(timerInterval);
+    endTime = new Date();
+    
+    // Hitung skor
+    const score = calculateScore();
+    const timeUsed = Math.floor((endTime - startTime) / 1000);
+    
+    // Tampilkan layar kecurangan
+    document.getElementById('examSection').style.display = 'none';
+    document.getElementById('cheatingSection').style.display = 'block';
+    
+    document.getElementById('cheatingName').textContent = document.getElementById('nama').value;
+    document.getElementById('cheatingClass').textContent = document.getElementById('kelas').value;
+    document.getElementById('cheatingReason').textContent = `Alasan: ${reason}`;
+    document.getElementById('cheatingTime').textContent = new Date().toLocaleString('id-ID');
+    
+    // Kirim data ke Google Sheets
+    sendToGoogleSheets({
+        statusUjian: 'DIHENTIKAN',
+        alasanHenti: reason,
+        skor: score,
+        waktuDigunakan: formatTime(timeUsed)
+    });
+}
+
+// ===============================
+// SUBMIT UJIAN
+// ===============================
+function confirmSubmit() {
     const unanswered = jawabanUser.filter(a => a === null).length;
-    if (unanswered > 0) {
-        if (!confirm(`Masih ada ${unanswered} soal yang belum terjawab. Yakin tetap ingin mengumpulkan?`)) {
-            return;
-        }
+    if (unanswered > 0 && !confirm(`Masih ada ${unanswered} soal belum terjawab. Yakin ingin mengumpulkan?`)) {
+        return;
     }
-    
     submitExam();
-});
+}
 
 async function submitExam() {
     clearInterval(timerInterval);
@@ -561,7 +227,7 @@ async function submitExam() {
     
     // Hitung skor
     const score = calculateScore();
-    const percentage = Math.round((score / soalData.length) * 100);
+    const percentage = Math.round((score / 15) * 100);
     const timeUsed = Math.floor((endTime - startTime) / 1000);
     
     // Tampilkan hasil
@@ -569,59 +235,150 @@ async function submitExam() {
     
     // Kirim data ke Google Sheets
     await sendToGoogleSheets({
-        nama: document.getElementById('nama').value,
-        kelas: document.getElementById('kelas').value,
+        statusUjian: 'SELESAI',
+        alasanHenti: 'Selesai mengerjakan',
         skor: score,
-        jawabanBenar: score,
-        totalSoal: soalData.length,
-        persentase: percentage + "%",
-        waktuDigunakan: formatTime(timeUsed),
-        statusUjian: "SELESAI",
-        alasanHenti: "Waktu habis / Selesai mengerjakan",
-        tabChanges: tabChangeCount,
-        copyAttempts: copyAttemptCount,
-        rightClicks: rightClickCount,
-        f12Pressed: f12Pressed ? 1 : 0,
-        fullscreenExit: fullscreenExitCount,
-        startTime: startTime.toISOString(),
-        endTime: endTime.toISOString(),
-        ...getDeviceInfo()
+        waktuDigunakan: formatTime(timeUsed)
     });
 }
 
-// Hitung skor
 function calculateScore() {
-    let score = 0;
-    soalData.forEach((question, index) => {
-        if (jawabanUser[index] === question.jawaban) {
-            score++;
-        }
-    });
-    return score;
+    return jawabanUser.reduce((score, answer, index) => {
+        return score + (answer === soalData[index].jawaban ? 1 : 0);
+    }, 0);
 }
 
-// Tampilkan hasil
+// ===============================
+// KIRIM DATA KE GOOGLE SHEETS
+// ===============================
+async function sendToGoogleSheets(additionalData) {
+    try {
+        const nama = document.getElementById('nama').value;
+        const kelas = document.getElementById('kelas').value;
+        const score = calculateScore();
+        const percentage = Math.round((score / 15) * 100);
+        const timeUsed = Math.floor((endTime - startTime) / 1000);
+        
+        const data = {
+            nama: nama,
+            kelas: kelas,
+            skor: score,
+            jawabanBenar: score,
+            totalSoal: 15,
+            persentase: percentage,
+            waktuDigunakan: formatTime(timeUsed),
+            statusUjian: additionalData.statusUjian || 'SELESAI',
+            alasanHenti: additionalData.alasanHenti || 'Selesai mengerjakan',
+            deviceType: getDeviceType(),
+            os: getOS(),
+            browser: getBrowser(),
+            resolution: `${screen.width}x${screen.height}`,
+            userAgent: navigator.userAgent.substring(0, 200),
+            ipAddress: 'Tidak terdeteksi',
+            tabChanges: tabChangeCount,
+            copyAttempts: 0,
+            rightClicks: rightClickCount,
+            f12Pressed: 0,
+            fullscreenExit: 0,
+            startTime: startTime.toISOString(),
+            endTime: endTime.toISOString()
+        };
+        
+        console.log('📤 Mengirim data:', data);
+        
+        // Method 1: Fetch dengan JSON
+        const response = await fetch(CONFIG.WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        console.log('✅ Data dikirim via fetch');
+        
+        // Method 2: Form submission sebagai backup
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = CONFIG.WEB_APP_URL;
+        form.target = '_blank';
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'data';
+        input.value = JSON.stringify(data);
+        form.appendChild(input);
+        
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(() => document.body.removeChild(form), 1000);
+        
+        return true;
+        
+    } catch (error) {
+        console.error('❌ Error mengirim data:', error);
+        return false;
+    }
+}
+
+// ===============================
+// FUNGSI BANTU
+// ===============================
+function formatTime(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min} menit ${sec} detik`;
+}
+
+function getDeviceType() {
+    const ua = navigator.userAgent;
+    if (/Android/.test(ua)) return 'Mobile (Android)';
+    if (/iPhone|iPad/.test(ua)) return 'Mobile (iOS)';
+    if (/Windows/.test(ua)) return 'Desktop (Windows)';
+    if (/Mac/.test(ua)) return 'Desktop (Mac)';
+    return 'Unknown';
+}
+
+function getOS() {
+    const ua = navigator.userAgent;
+    if (/Windows/.test(ua)) return 'Windows';
+    if (/Mac/.test(ua)) return 'macOS';
+    if (/Android/.test(ua)) return 'Android';
+    if (/iOS/.test(ua)) return 'iOS';
+    return 'Unknown';
+}
+
+function getBrowser() {
+    const ua = navigator.userAgent;
+    if (/Chrome/.test(ua)) return 'Chrome';
+    if (/Firefox/.test(ua)) return 'Firefox';
+    if (/Safari/.test(ua)) return 'Safari';
+    if (/Edge/.test(ua)) return 'Edge';
+    return 'Unknown';
+}
+
 function showResult(score, percentage, timeUsed) {
-    examSection.style.display = 'none';
-    resultSection.style.display = 'block';
+    document.getElementById('examSection').style.display = 'none';
+    document.getElementById('resultSection').style.display = 'block';
     
-    const grade = getGrade(percentage);
+    const grade = percentage >= 90 ? 'A' : 
+                  percentage >= 80 ? 'B' : 
+                  percentage >= 70 ? 'C' : 
+                  percentage >= 60 ? 'D' : 'E';
     
-    const resultHTML = `
+    document.getElementById('resultCard').innerHTML = `
         <div class="result-header">
             <h2><i class="fas fa-award"></i> HASIL ULANGAN HARIAN</h2>
-            <p class="result-subtitle">${grade.message}</p>
         </div>
-        
         <div class="result-score">
             <div class="score-circle">
                 <span class="score-value">${score}</span>
-                <span class="score-total">/ ${soalData.length}</span>
+                <span class="score-total">/ 15</span>
             </div>
             <div class="score-percentage">${percentage}%</div>
-            <div class="score-grade">${grade.letter}</div>
+            <div class="score-grade">${grade}</div>
         </div>
-        
         <div class="result-details">
             <div class="detail-row">
                 <span><i class="fas fa-user"></i> Nama</span>
@@ -635,210 +392,50 @@ function showResult(score, percentage, timeUsed) {
                 <span><i class="fas fa-clock"></i> Waktu Digunakan</span>
                 <span>${formatTime(timeUsed)}</span>
             </div>
-            <div class="detail-row">
-                <span><i class="fas fa-calendar"></i> Tanggal Ujian</span>
-                <span>${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-            </div>
         </div>
-        
         <div class="result-actions">
-            <button class="btn-review" onclick="reviewAnswers()">
-                <i class="fas fa-eye"></i> REVIEW JAWABAN
-            </button>
-            <button class="btn-new" onclick="location.reload()">
+            <button class="btn-review" onclick="location.reload()">
                 <i class="fas fa-redo"></i> UJIAN BARU
             </button>
         </div>
     `;
-    
-    document.getElementById('resultCard').innerHTML = resultHTML;
 }
 
-function getGrade(percentage) {
-    if (percentage >= 90) return { letter: "A", message: "Sangat Baik! Pertahankan!" };
-    if (percentage >= 80) return { letter: "B", message: "Baik! Tingkatkan lagi!" };
-    if (percentage >= 70) return { letter: "C", message: "Cukup. Perlu belajar lebih giat!" };
-    if (percentage >= 60) return { letter: "D", message: "Kurang. Silakan remidi!" };
-    return { letter: "E", message: "Sangat Kurang. Wajib remidi!" };
-}
-
-// ===============================
-// FUNGSI BANTU
-// ===============================
-
-// Format waktu
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins} menit ${secs} detik`;
-}
-
-// Get device info
-function getDeviceInfo() {
-    const ua = navigator.userAgent;
-    let device = "Desktop";
-    let os = "Unknown";
-    let browser = "Unknown";
-    
-    // Device
-    if (/Android/.test(ua)) device = "Mobile (Android)";
-    else if (/iPhone|iPad|iPod/.test(ua)) device = "Mobile (iOS)";
-    else if (/Windows/.test(ua)) device = "Desktop (Windows)";
-    else if (/Mac/.test(ua)) device = "Desktop (Mac)";
-    else if (/Linux/.test(ua)) device = "Desktop (Linux)";
-    
-    // OS
-    if (/Windows NT 10/.test(ua)) os = "Windows 10/11";
-    else if (/Windows NT 6.3/.test(ua)) os = "Windows 8.1";
-    else if (/Windows NT 6.2/.test(ua)) os = "Windows 8";
-    else if (/Windows NT 6.1/.test(ua)) os = "Windows 7";
-    else if (/Mac/.test(ua)) os = "macOS";
-    else if (/Android/.test(ua)) os = "Android";
-    else if (/iOS|iPhone|iPad/.test(ua)) os = "iOS";
-    
-    // Browser
-    if (/Chrome/.test(ua) && !/Edge/.test(ua)) browser = "Chrome";
-    else if (/Firefox/.test(ua)) browser = "Firefox";
-    else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = "Safari";
-    else if (/Edge/.test(ua)) browser = "Edge";
-    else if (/Opera/.test(ua)) browser = "Opera";
-    
-    return {
-        deviceType: device,
-        os: os,
-        browser: browser,
-        resolution: `${screen.width} x ${screen.height}`,
-        userAgent: ua.substring(0, 150),
-        ipAddress: "Fetching..."
-    };
-}
-
-// Kirim data ke Google Sheets
-async function sendToGoogleSheets(data) {
+async function testConnection() {
     try {
-        console.log("📤 Mengirim data ke Google Sheets...", data);
-        
-        // Gunakan form submission untuk bypass CORS
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = WEB_APP_URL;
-        form.target = '_blank';
-        
-        // Tambahkan data sebagai input hidden
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'data';
-        input.value = JSON.stringify(data);
-        form.appendChild(input);
-        
-        // Submit form
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
-        
-        console.log("✅ Data berhasil dikirim");
-        
+        const response = await fetch(CONFIG.WEB_APP_URL + '?test=' + Date.now());
+        console.log('✅ Koneksi Google Apps Script berhasil');
     } catch (error) {
-        console.error("❌ Gagal mengirim data:", error);
+        console.log('⚠️ Koneksi test gagal, tapi sistem tetap berjalan');
     }
 }
 
-// Review jawaban
-window.reviewAnswers = function() {
-    resultSection.style.display = 'none';
-    examSection.style.display = 'block';
-    
-    // Tampilkan semua soal dengan jawaban
-    let reviewHTML = '';
-    soalData.forEach((question, index) => {
-        const userAnswer = jawabanUser[index];
-        const isCorrect = userAnswer === question.jawaban;
-        
-        reviewHTML += `
-            <div class="question-card ${isCorrect ? 'correct' : 'wrong'}">
-                <div class="question-number">${question.id}</div>
-                <div class="question-text">${question.soal}</div>
-                <div class="options-container">
-                    ${question.pilihan.map((option, i) => {
-                        let optionClass = 'option';
-                        if (i === userAnswer) optionClass += ' user-answer';
-                        if (i === question.jawaban) optionClass += ' correct-answer';
-                        
-                        return `
-                            <div class="${optionClass}">
-                                <div class="option-letter">${String.fromCharCode(65 + i)}</div>
-                                <div class="option-text">${option}</div>
-                                ${i === question.jawaban ? '<i class="fas fa-check correct-icon"></i>' : ''}
-                                ${i === userAnswer && !isCorrect ? '<i class="fas fa-times wrong-icon"></i>' : ''}
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-                <div class="answer-status">
-                    ${isCorrect ? 
-                        '<span class="status-correct"><i class="fas fa-check"></i> BENAR</span>' : 
-                        `<span class="status-wrong"><i class="fas fa-times"></i> SALAH. Jawaban benar: ${String.fromCharCode(65 + question.jawaban)}</span>`
-                    }
-                </div>
-            </div>
-        `;
-    });
-    
-    questionsContainer.innerHTML = reviewHTML;
-    
-    // Update CSS untuk review
-    const style = document.createElement('style');
-    style.textContent = `
-        .correct { border-left-color: #4CAF50; }
-        .wrong { border-left-color: #f44336; }
-        .user-answer { background: #FFEBEE !important; border-color: #f44336 !important; }
-        .correct-answer { background: #E8F5E9 !important; border-color: #4CAF50 !important; }
-        .correct-icon { color: #4CAF50; margin-left: 10px; }
-        .wrong-icon { color: #f44336; margin-left: 10px; }
-        .answer-status { margin-top: 15px; padding: 10px; border-radius: 5px; }
-        .status-correct { background: #C8E6C9; color: #2E7D32; padding: 5px 10px; border-radius: 5px; }
-        .status-wrong { background: #FFCDD2; color: #D32F2F; padding: 5px 10px; border-radius: 5px; }
-    `;
-    document.head.appendChild(style);
-    
-    // Sembunyikan navigasi dan tombol submit
-    document.querySelector('.navigation').style.display = 'none';
-    document.querySelector('.submit-section').style.display = 'none';
-    
-    // Tambahkan tombol kembali
-    const backButton = document.createElement('div');
-    backButton.innerHTML = `
-        <button class="btn-return" onclick="location.reload()" style="margin: 20px auto; display: block;">
-            <i class="fas fa-home"></i> KEMBALI KE HALAMAN AWAL
-        </button>
-    `;
-    questionsContainer.appendChild(backButton);
-};
-
-// Return to home
-btnReturnHome.addEventListener('click', () => {
-    location.reload();
-});
-
-// Tambahkan CSS animasi
-const animationCSS = document.createElement('style');
-animationCSS.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
+// Tambahkan CSS untuk hasil
+const resultCSS = document.createElement('style');
+resultCSS.textContent = `
+    .result-header { text-align: center; margin-bottom: 30px; }
+    .result-score { text-align: center; margin: 30px 0; }
+    .score-circle {
+        width: 150px; height: 150px; border-radius: 50%;
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white; display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        margin: 0 auto; font-size: 2.5rem; font-weight: bold;
     }
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
+    .score-total { font-size: 1.2rem; opacity: 0.8; }
+    .score-percentage { font-size: 1.8rem; font-weight: bold; color: #2E7D32; margin: 10px 0; }
+    .score-grade { font-size: 2rem; font-weight: bold; color: #1B5E20; }
+    .result-details { background: #f9f9f9; padding: 20px; border-radius: 10px; margin: 20px 0; }
+    .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e0e0e0; }
+    .detail-row:last-child { border-bottom: none; }
+    .result-actions { text-align: center; margin-top: 30px; }
+    .btn-review {
+        background: #4CAF50; color: white; border: none;
+        padding: 15px 30px; font-size: 1.1rem; border-radius: 10px;
+        cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
     }
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
+    .btn-review:hover { background: #388E3C; }
 `;
-document.head.appendChild(animationCSS);
+document.head.appendChild(resultCSS);
 
-
-console.log("🚀 Sistem Ulangan Harian siap digunakan!");
-
+console.log('✅ Sistem siap digunakan!');
