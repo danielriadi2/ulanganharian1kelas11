@@ -839,4 +839,5 @@ animationCSS.textContent = `
 `;
 document.head.appendChild(animationCSS);
 
+
 console.log("🚀 Sistem Ulangan Harian siap digunakan!");
