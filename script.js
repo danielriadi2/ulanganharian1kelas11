@@ -3,7 +3,7 @@
 // ============================================
 
 // Konfigurasi
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxNspxYbwKxMgEoeDPW6MTIfWHkR_5YmqRiybGewzaeOLBVm8UEHq0KLqbXTOx99W7Nyw/exec'; // Ganti dengan URL Google Apps Script
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw3Un2_r8D_81K699B6mjcCd-SRcnxFOyanWVGVZipm5W_XsSE9ad4rJeE19V__Ffyvmw/exec'; // Ganti dengan URL Google Apps Script
 const EXAM_DURATION = 13 * 60 + 45; // 13 menit 45 detik
 const MAX_TAB_CHANGES = 0; // Maksimal 0 kali ganti tab
 const MAX_WARNINGS = 1; // Maksimal 1 peringatan
@@ -841,3 +841,4 @@ document.head.appendChild(animationCSS);
 
 
 console.log("🚀 Sistem Ulangan Harian siap digunakan!");
+
