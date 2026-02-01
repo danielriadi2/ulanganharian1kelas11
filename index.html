@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULANGAN HARIAN - SMA Negeri 5 Tanah Putih</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="logo-sekolah.png" type="image/png">
+</head>
+<body>
+    <!-- Peringatan Anti Kecurangan -->
+    <div class="warning-banner" id="warningBanner">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>PERINGATAN ANTI KECURANGAN:</strong> Sistem akan menghentikan ujian secara otomatis jika terdeteksi kecurangan. Tidak ada toleransi atau kesempatan kedua.
+    </div>
+
+    <div class="container">
+        <!-- Header Sekolah -->
+        <header class="school-header">
+            <div class="logo-container">
+                <img src="logo-sekolah.png" alt="Logo SMA Negeri 5 Tanah Putih" class="school-logo">
+            </div>
+            <div class="school-info">
+                <h1>SMA NEGERI 5 TANAH PUTIH</h1>
+                <p class="moto">"Berprestasi, Berkarakter, Berintegritas"</p>
+                <h2><i class="fas fa-file-signature"></i> ULANGAN HARIAN PERTAMA</h2>
+                <p class="subject">Mata Pelajaran: Sejarah Indonesia | Bab: Pendudukan Jepang</p>
+            </div>
+        </header>
+
+        <!-- Form Data Diri -->
+        <section class="data-section" id="dataSection">
+            <div class="section-title">
+                <i class="fas fa-user-check"></i> IDENTITAS PESERTA
+            </div>
+            
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="nama"><i class="fas fa-user"></i> NAMA LENGKAP:</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap sesuai absen" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="kelas"><i class="fas fa-users"></i> KELAS:</label>
+                    <select id="kelas" required>
+                        <option value="">-- PILIH KELAS --</option>
+                        <option value="10 Satu">10 Satu</option>
+                        <option value="10 Dua">10 Dua</option>
+                        <option value="10 Tiga">10 Tiga</option>
+                        <option value="10 Empat">10 Empat</option>
+                        <option value="11 Satu">11 Satu</option>
+                        <option value="11 Dua">11 Dua</option>
+                        <option value="11 Tiga">11 Tiga</option>
+                        <option value="12 Satu">12 Satu</option>
+                        <option value="12 Dua">12 Dua</option>
+                        <option value="12 Tiga">12 Tiga</option>
+                    </select>
+                </div>
+                
+                <div class="rules-box">
+                    <h4><i class="fas fa-gavel"></i> ATURAN PENTING:</h4>
+                    <ul>
+                        <li><i class="fas fa-ban"></i> <strong>TIDAK BOLEH</strong> membuka tab/window lain</li>
+                        <li><i class="fas fa-ban"></i> <strong>TIDAK BOLEH</strong> menekan F12/Inspect Element</li>
+                        <li><i class="fas fa-ban"></i> <strong>TIDAK BOLEH</strong> copy-paste atau screenshot</li>
+                        <li><i class="fas fa-ban"></i> <strong>TIDAK BOLEH</strong> keluar dari mode fullscreen</li>
+                        <li><i class="fas fa-clock"></i> Waktu: <strong>13 menit 45 detik</strong></li>
+                        <li><i class="fas fa-exclamation-circle"></i> Jika terdeteksi curang: <strong>LANGSUNG DIHENTIKAN & NILAI 0</strong></li>
+                    </ul>
+                </div>
+                
+                <button class="btn-start" id="btnStart">
+                    <i class="fas fa-play"></i> MULAI ULANGAN
+                </button>
+            </div>
+        </section>
+
+        <!-- Section Soal -->
+        <section class="exam-section" id="examSection" style="display: none;">
+            <!-- Header Ujian -->
+            <div class="exam-header">
+                <div class="student-info">
+                    <span id="studentName">-</span> | <span id="studentClass">-</span>
+                </div>
+                
+                <div class="timer-box" id="timerBox">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timer">13:45</span>
+                    <div class="timer-label">SISA WAKTU</div>
+                </div>
+                
+                <div class="cheating-monitor">
+                    <div class="monitor-item">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span id="tabCount">0</span>
+                        <small>GANTI TAB</small>
+                    </div>
+                    <div class="monitor-item">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <span id="rightClickCount">0</span>
+                        <small>KLIK KANAN</small>
+                    </div>
+                    <div class="monitor-item warning">
+                        <i class="fas fa-radiation-alt"></i>
+                        <span id="warningCount">0</span>
+                        <small>PERINGATAN</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal -->
+            <div class="questions-container" id="questionsContainer">
+                <!-- Soal akan dimuat di sini oleh JavaScript -->
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn-nav" id="btnPrev" disabled>
+                    <i class="fas fa-arrow-left"></i> SEBELUMNYA
+                </button>
+                <span class="page-info">Soal <span id="currentQuestion">1</span> dari 15</span>
+                <button class="btn-nav" id="btnNext">
+                    SELANJUTNYA <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit-section">
+                <button class="btn-submit" id="btnSubmit">
+                    <i class="fas fa-paper-plane"></i> KUMPULKAN JAWABAN
+                </button>
+                <p class="submit-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Pastikan semua soal telah terjawab sebelum mengumpulkan
+                </p>
+            </div>
+        </section>
+
+        <!-- Hasil -->
+        <section class="result-section" id="resultSection" style="display: none;">
+            <div class="result-card" id="resultCard">
+                <!-- Hasil akan dimuat di sini -->
+            </div>
+        </section>
+
+        <!-- Halaman Kecurangan -->
+        <section class="cheating-section" id="cheatingSection" style="display: none;">
+            <div class="cheating-card">
+                <div class="cheating-icon">
+                    <i class="fas fa-user-slash"></i>
+                </div>
+                <h2><i class="fas fa-skull-crossbones"></i> UJIAN DIHENTIKAN</h2>
+                <p class="cheating-reason" id="cheatingReason">Alasan: Terdeteksi kecurangan</p>
+                
+                <div class="cheating-details">
+                    <p><strong>Nama:</strong> <span id="cheatingName">-</span></p>
+                    <p><strong>Kelas:</strong> <span id="cheatingClass">-</span></p>
+                    <p><strong>Waktu:</strong> <span id="cheatingTime">-</span></p>
+                    <p><strong>Pelanggaran:</strong> <span id="cheatingViolation">-</span></p>
+                </div>
+                
+                <div class="consequences">
+                    <h4><i class="fas fa-balance-scale"></i> KONSEKUENSI:</h4>
+                    <ul>
+                        <li>Ujian langsung dihentikan</li>
+                        <li>Jawaban otomatis terkumpul dengan status <strong>"DIHENTIKAN"</strong></li>
+                        <li>Data tersimpan di database sekolah</li>
+                        <li>Tidak ada kesempatan mengulang</li>
+                        <li>Akan dipanggil oleh guru BK</li>
+                    </ul>
+                </div>
+                
+                <button class="btn-return" id="btnReturnHome">
+                    <i class="fas fa-home"></i> KEMBALI KE HALAMAN AWAL
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-school">
+                <i class="fas fa-school"></i>
+                <h3>SMA NEGERI 5 TANAH PUTIH</h3>
+            </div>
+            <p>Sistem Ulangan Harian Online dengan Deteksi Kecurangan Otomatis</p>
+            <p class="copyright">
+                <i class="far fa-copyright"></i> 2026 - DANIEL RIADI SIANIPAR - GURU SEJARAH SMA NEGERI 5 TANAH PUTIH
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

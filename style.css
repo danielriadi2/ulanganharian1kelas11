@@ -1,0 +1,709 @@
+/* ===============================
+   STYLE ULANGAN HARIAN DENGAN DETEKSI KECURANGAN
+   =============================== */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #1b5e20;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Warning Banner */
+.warning-banner {
+    background: linear-gradient(90deg, #ff6b6b, #ff5252);
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    animation: pulse 2s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.warning-banner i {
+    font-size: 1.2em;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(27, 94, 32, 0.2);
+    overflow: hidden;
+    border: 3px solid #2e7d32;
+}
+
+/* School Header */
+.school-header {
+    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    padding: 10px;
+    border: 3px solid #4caf50;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.school-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.school-info h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.school-info .moto {
+    font-style: italic;
+    color: #c8e6c9;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.school-info h2 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    color: #a5d6a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.school-info .subject {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+/* Data Section */
+.data-section {
+    padding: 40px;
+}
+
+.section-title {
+    background: linear-gradient(90deg, #4caf50, #388e3c);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2e7d32;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #81c784;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    background: #f9f9f9;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    background: white;
+}
+
+.rules-box {
+    background: #fff3e0;
+    border-left: 5px solid #ff9800;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+}
+
+.rules-box h4 {
+    color: #e65100;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rules-box ul {
+    list-style: none;
+}
+
+.rules-box li {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ffcc80;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rules-box li:last-child {
+    border-bottom: none;
+}
+
+.rules-box li i.fa-ban {
+    color: #f44336;
+}
+
+.rules-box li i.fa-clock,
+.rules-box li i.fa-exclamation-circle {
+    color: #ff9800;
+}
+
+.btn-start {
+    background: linear-gradient(90deg, #43a047, #2e7d32);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    letter-spacing: 1px;
+}
+
+.btn-start:hover {
+    background: linear-gradient(90deg, #388e3c, #1b5e20);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(56, 142, 60, 0.4);
+}
+
+/* Exam Section */
+.exam-section {
+    padding: 20px;
+}
+
+.exam-header {
+    background: #f1f8e9;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    border: 2px solid #c8e6c9;
+}
+
+.student-info {
+    background: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #2e7d32;
+    border: 2px solid #4caf50;
+    font-size: 1.1rem;
+}
+
+.timer-box {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 150px;
+    box-shadow: 0 5px 15px rgba(245, 124, 0, 0.3);
+}
+
+.timer-box i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+#timer {
+    font-family: 'Courier New', monospace;
+    font-size: 2.2rem;
+    font-weight: bold;
+    display: block;
+    letter-spacing: 2px;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.cheating-monitor {
+    display: flex;
+    gap: 20px;
+}
+
+.monitor-item {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    min-width: 100px;
+}
+
+.monitor-item i {
+    font-size: 1.3rem;
+    color: #757575;
+    margin-bottom: 5px;
+}
+
+.monitor-item span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #424242;
+}
+
+.monitor-item small {
+    font-size: 0.8rem;
+    color: #9e9e9e;
+}
+
+.monitor-item.warning {
+    border-color: #ff9800;
+    background: #fff3e0;
+}
+
+.monitor-item.warning i {
+    color: #ff9800;
+}
+
+.monitor-item.warning span {
+    color: #e65100;
+}
+
+/* Questions */
+.questions-container {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 2px solid #e0e0e0;
+}
+
+.question-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-left: 5px solid #4caf50;
+}
+
+.question-number {
+    background: #4caf50;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option {
+    padding: 18px 20px;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.option:hover {
+    background: #f1f8e9;
+    border-color: #81c784;
+}
+
+.option.selected {
+    background: #e8f5e9;
+    border-color: #4caf50;
+    font-weight: bold;
+}
+
+.option-letter {
+    background: #4caf50;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.option-text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #424242;
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.btn-nav {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.btn-nav:hover:not(:disabled) {
+    background: #388e3c;
+    transform: translateY(-2px);
+}
+
+.btn-nav:disabled {
+    background: #c8e6c9;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.submit-section {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.btn-submit {
+    background: linear-gradient(90deg, #f44336, #d32f2f);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(90deg, #d32f2f, #b71c1c);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(244, 67, 54, 0.3);
+}
+
+.submit-warning {
+    color: #f44336;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Result Section */
+.result-section {
+    padding: 40px;
+}
+
+.result-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 3px solid #4caf50;
+}
+
+/* Cheating Section */
+.cheating-section {
+    padding: 40px;
+}
+
+.cheating-card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 3px solid #f44336;
+}
+
+.cheating-icon {
+    font-size: 4rem;
+    color: #f44336;
+    margin-bottom: 20px;
+}
+
+.cheating-card h2 {
+    color: #f44336;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.cheating-reason {
+    background: #ffebee;
+    padding: 15px;
+    border-radius: 10px;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.cheating-details {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.cheating-details p {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.cheating-details p:last-child {
+    border-bottom: none;
+}
+
+.consequences {
+    background: #fff3e0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.consequences h4 {
+    color: #e65100;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.consequences ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.consequences li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.consequences li:before {
+    content: "✗";
+    color: #f44336;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.btn-return {
+    background: #757575;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-return:hover {
+    background: #616161;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    border-top: 2px solid #e0e0e0;
+}
+
+.footer-school {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer-school i {
+    font-size: 2rem;
+    color: #4caf50;
+}
+
+.footer-school h3 {
+    color: #2e7d32;
+    font-size: 1.4rem;
+}
+
+.copyright {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #9e9e9e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .school-header {
+        padding: 20px;
+    }
+    
+    .logo-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 0 auto 20px;
+    }
+    
+    .school-info h1 {
+        font-size: 1.8rem;
+    }
+    
+    .exam-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cheating-monitor {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .monitor-item {
+        min-width: 80px;
+    }
+    
+    .navigation {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .result-card,
+    .cheating-card {
+        padding: 20px;
+    }
+}
